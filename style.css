@@ -100,10 +100,13 @@ section {
 .menu-btn span:before { bottom: 8px; }
 .menu-btn span:after { top: 8px; }
 
-/* クリック時のアニメーション (×印に) */
+/* 【修正箇所②】クリック時のアニメーション (×印に)
+  ※メニューの中身が暗いネイビー（rgba(26, 37, 48, 0.95)）のため、
+   背景と同化しないように「×」に変わった後の線の色を「白（var(--white)）」に変更しました。
+*/
 #menu-btn-check:checked ~ .menu-btn span { background-color: rgba(255, 255, 255, 0); }
-#menu-btn-check:checked ~ .menu-btn span::before { bottom: 0; transform: rotate(45deg); }
-#menu-btn-check:checked ~ .menu-btn span::after { top: 0; transform: rotate(-45deg); }
+#menu-btn-check:checked ~ .menu-btn span::before { bottom: 0; transform: rotate(45deg); background-color: var(--white); }
+#menu-btn-check:checked ~ .menu-btn span::after { top: 0; transform: rotate(-45deg); background-color: var(--white); }
 
 /* メニュー中身 (オーバーレイ) */
 .menu-content {
@@ -304,8 +307,18 @@ section {
     margin-top: 20px;
     letter-spacing: 0.1em;
 }
+
 /* --- 5. インフォメーション --- */
-.info-details { margin-bottom: 50px; font-size: 1.1rem; }
+/* 【修正箇所①】中央のまま左揃えに
+  ・.info-details自体を「inline-block」にし、中身を「text-align: left;」に変更しました。
+  ・親要素の「section」に「text-align: center;」が効いているため、これで中央に寄ったまま左に揃います。
+*/
+.info-details { 
+    display: inline-block;
+    text-align: left;
+    margin-bottom: 50px; 
+    font-size: 1.1rem; 
+}
 .info-details strong { color: var(--accent-color); }
 
 iframe {
