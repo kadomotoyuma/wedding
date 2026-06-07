@@ -62,17 +62,16 @@ section {
 /* =========================================
    2. ハンバーガーメニュー
    ========================================= */
-/* 【重要修正】ボタンとメニューを内包する親全体の重なり順を「最前面(1000)」に固定 */
+/* ボタンとメニューを包む親の z-index をWEBサイトの絶対的最前面「9999」に引き上げます */
 .hamburger-menu {
     position: fixed;
     top: 0;
     left: 0;
-    z-index: 1000; 
+    z-index: 9999; 
 }
 
 #menu-btn-check { display: none; } /* チェックボックスは隠す */
 
-/* ボタンの位置を調整（親要素の基準変更に伴う調整） */
 .menu-btn {
     display: flex;
     height: 60px;
@@ -84,13 +83,13 @@ section {
     cursor: pointer;
     box-shadow: 0 4px 10px rgba(0,0,0,0.1);
     transition: var(--transition);
-    position: fixed; /* 画面に対して固定配置 */
+    position: fixed;
     top: 20px;
     left: 20px;
-    z-index: 1002; /* メニューの背景(1001)よりも【絶対に手前】にする */
+    z-index: 10001; /* メニュー背景(10000)の【絶対に手前】に固定 */
 }
 
-/* 三本線 */
+/* 三本線（基本はネイビー） */
 .menu-btn span,
 .menu-btn span:before,
 .menu-btn span:after {
@@ -106,15 +105,28 @@ section {
 .menu-btn span:before { bottom: 8px; }
 .menu-btn span:after { top: 8px; }
 
-/* クリック時のアニメーション (×印に) */
-#menu-btn-check:checked ~ .menu-btn span { background-color: rgba(255, 255, 255, 0); }
-#menu-btn-check:checked ~ .menu-btn span::before { bottom: 0; transform: rotate(45deg); background-color: var(--white); }
-#menu-btn-check:checked ~ .menu-btn span::after { top: 0; transform: rotate(-45deg); background-color: var(--white); }
-
-/* メニューが開いた時、丸い白背景と影を消して、白い「×」だけを浮き立たせる設定 */
+/* 【最重要修正】クリックされてメニューが開いた状態の×ボタン */
+/* 背景の丸い白クッションはそのまま残すか、少し透過させて押しやすく存在感を保ちます */
 #menu-btn-check:checked ~ .menu-btn {
-    background-color: transparent;
+    background-color: rgba(255, 255, 255, 0.2); /* メニュー上で浮かないよう上品に透過 */
     box-shadow: none;
+}
+
+/* 開いた時、真ん中の線だけ消す */
+#menu-btn-check:checked ~ .menu-btn span { 
+    background-color: rgba(255, 255, 255, 0); 
+}
+
+/* 【重要】上下の線を45度傾けて、メニューの紺背景でも絶対に見えるように「白（#ffffff）」に強制変更します */
+#menu-btn-check:checked ~ .menu-btn span::before { 
+    bottom: 0; 
+    transform: rotate(45deg); 
+    background-color: #ffffff !important; 
+}
+#menu-btn-check:checked ~ .menu-btn span::after { 
+    top: 0; 
+    transform: rotate(-45deg); 
+    background-color: #ffffff !important; 
 }
 
 /* メニュー中身 (オーバーレイ) */
@@ -124,7 +136,7 @@ section {
     position: fixed;
     top: 0;
     left: -100%; /* 初期は画面外 */
-    z-index: 1001; /* ボタン(1002)の【真後ろ】に配置して画面を覆う */
+    z-index: 10000; /* ボタンのすぐ後ろに配置 */
     background-color: rgba(26, 37, 48, 0.95); /* 深いネイビーグレー */
     transition: var(--transition);
     display: flex;
@@ -428,6 +440,5 @@ footer {
     section { padding: 70px 15px; }
     .profile-card { padding: 30px; }
     .rsvp { padding: 50px 20px; margin: 70px 15px; }
-    /* スマホ表示の時は横幅にゆとりを持たせて左寄せにする */
     .info-details { max-width: 90%; }
 }
