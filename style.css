@@ -62,17 +62,17 @@ section {
 /* =========================================
    2. ハンバーガーメニュー
    ========================================= */
+/* 【重要修正】ボタンとメニューを内包する親全体の重なり順を「最前面(1000)」に固定 */
 .hamburger-menu {
     position: fixed;
-    top: 20px;
-    left: 20px;
-    /* 【修正箇所②】メニューの背景(z-index: 99)よりも手前に配置するため、
-       101 に引き上げて、×ボタンが背面に隠れないようにしました */
-    z-index: 101; 
+    top: 0;
+    left: 0;
+    z-index: 1000; 
 }
 
 #menu-btn-check { display: none; } /* チェックボックスは隠す */
 
+/* ボタンの位置を調整（親要素の基準変更に伴う調整） */
 .menu-btn {
     display: flex;
     height: 60px;
@@ -84,6 +84,10 @@ section {
     cursor: pointer;
     box-shadow: 0 4px 10px rgba(0,0,0,0.1);
     transition: var(--transition);
+    position: fixed; /* 画面に対して固定配置 */
+    top: 20px;
+    left: 20px;
+    z-index: 1002; /* メニューの背景(1001)よりも【絶対に手前】にする */
 }
 
 /* 三本線 */
@@ -102,13 +106,12 @@ section {
 .menu-btn span:before { bottom: 8px; }
 .menu-btn span:after { top: 8px; }
 
-/* メニューが開いた時（クリック時）のアニメーション (×印に) */
+/* クリック時のアニメーション (×印に) */
 #menu-btn-check:checked ~ .menu-btn span { background-color: rgba(255, 255, 255, 0); }
 #menu-btn-check:checked ~ .menu-btn span::before { bottom: 0; transform: rotate(45deg); background-color: var(--white); }
 #menu-btn-check:checked ~ .menu-btn span::after { top: 0; transform: rotate(-45deg); background-color: var(--white); }
 
-/* 【修正箇所②】×ボタンをメニュー一覧の上に配置するための追加設定
-   メニューが開いた時、ボタンの丸い背景を透明にして、×ボタンだけが綺麗に浮き出るようにします */
+/* メニューが開いた時、丸い白背景と影を消して、白い「×」だけを浮き立たせる設定 */
 #menu-btn-check:checked ~ .menu-btn {
     background-color: transparent;
     box-shadow: none;
@@ -121,7 +124,7 @@ section {
     position: fixed;
     top: 0;
     left: -100%; /* 初期は画面外 */
-    z-index: 99;
+    z-index: 1001; /* ボタン(1002)の【真後ろ】に配置して画面を覆う */
     background-color: rgba(26, 37, 48, 0.95); /* 深いネイビーグレー */
     transition: var(--transition);
     display: flex;
@@ -315,11 +318,7 @@ section {
 }
 
 /* --- 5. インフォメーション --- */
-/* 【修正箇所①】中央配置のまま左揃えに
-   ・max-width を指定し、インラインブロック要素を確実に「塊」として制限。
-   ・margin: 0 auto; によって、その塊ごと画面の中央に配置。
-   ・text-align: left; で塊の中の文字だけを完全に左揃えに固定しました。
-*/
+/* 【修正箇所①】中央配置のまま左揃えに */
 .info-details { 
     display: inline-block;
     max-width: 550px;       /* 住所などの最長テキストに合わせた横幅の制限 */
