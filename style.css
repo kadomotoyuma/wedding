@@ -494,26 +494,34 @@ footer {
 
     /* --- 新郎新婦プロフィールのスマホ対応 --- */
     .profile-card { 
-        padding: 40px 20px; 
+        padding: 40px 15px; /* 余白を少し狭めて画面を広く使う */
     }
 
     /* 1. 横並びから縦並びに変更 */
     .profile-twins {
-        flex-direction: column; 
+        flex-direction: column !important; /* 確実に縦並びにするために!importantを付与 */
         align-items: center;    
-        gap: 50px; /* 新郎と新婦の間の上下の余白 */
+        gap: 45px; /* 新郎と新婦の間の上下の余白 */
     }
 
     /* 2. 個々のプロフィールが横幅いっぱいに広がらないよう調整 */
     .profile-person {
         width: 100%;
-        max-width: 320px; 
+        max-width: 280px; /* スマホからはみ出さないサイズに絞る */
     }
 
     /* 3. 画像サイズがスマホ画面に対して大きすぎないように制限 */
     .profile-img {
-        width: 150px;
-        height: 150px;
+        width: 140px;
+        height: 140px;
         margin-bottom: 15px;
+    }
+
+    /* 4. 【追加】英名が横にはみ出るのを防ぐ微調整 */
+    .profile-person h3, 
+    .profile-name {
+        font-size: 1.3rem !important; /* 文字サイズを少し小さく */
+        letter-spacing: 0.1em !important; /* 文字の間隔を狭めてはみ出し防止 */
+        word-wrap: break-word;
     }
 }
