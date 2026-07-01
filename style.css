@@ -488,40 +488,51 @@ footer {
     h1 { font-size: 2.2rem; }
     .hero-content.fade-in .engNames { font-size: 2.8rem; }
     #timer { font-size: 2.5rem; gap: 20px; }
-    section { padding: 70px 15px; }
+    section { padding: 60px 15px; } /* 上下パディングを少しスマートに */
     .rsvp { padding: 50px 20px; margin: 70px 15px; }
     .info-details { max-width: 90%; }
 
-    /* --- 新郎新婦プロフィールのスマホ対応 --- */
+    /* --- 新郎新婦プロフィールのスマホ対応（超重要修正） --- */
     .profile-card { 
-        padding: 40px 15px; /* 余白を少し狭めて画面を広く使う */
+        padding: 40px 15px; /* カード内の余白を縮めて内側のスペースを確保 */
     }
 
-    /* 1. 横並びから縦並びに変更 */
+    /* 1. 横並びから「縦並び」へ強制変更 */
     .profile-twins {
-        flex-direction: column !important; /* 確実に縦並びにするために!importantを付与 */
-        align-items: center;    
-        gap: 45px; /* 新郎と新婦の間の上下の余白 */
+        flex-direction: column !important; /* 横並びflexを強制的にリセット */
+        align-items: center !important;    /* 中央寄せ */
+        gap: 50px;                         /* 新郎と新婦の間の上下余白 */
     }
 
-    /* 2. 個々のプロフィールが横幅いっぱいに広がらないよう調整 */
+    /* 2. プロフィール要素が画面を突き破らないよう幅をリセット */
     .profile-person {
-        width: 100%;
-        max-width: 280px; /* スマホからはみ出さないサイズに絞る */
+        width: 100% !important;
+        max-width: 290px;                  /* スマホ画面に綺麗に収まるサイズ */
+        box-sizing: border-box;
     }
 
-    /* 3. 画像サイズがスマホ画面に対して大きすぎないように制限 */
+    /* 3. プロフィール画像のサイズをスマホ用に最適化 */
     .profile-img {
-        width: 140px;
-        height: 140px;
-        margin-bottom: 15px;
+        width: 150px;
+        height: 150px;
+        margin-bottom: 20px;
     }
 
-    /* 4. 【追加】英名が横にはみ出るのを防ぐ微調整 */
-    .profile-person h3, 
+    /* 4. 名前の英字が横に広がってはみ出るのを防止 */
     .profile-name {
-        font-size: 1.3rem !important; /* 文字サイズを少し小さく */
-        letter-spacing: 0.1em !important; /* 文字の間隔を狭めてはみ出し防止 */
-        word-wrap: break-word;
+        font-size: 1.3rem !important;      /* 文字を少しだけ小さく */
+        letter-spacing: 0.15em !important; /* 文字間隔をスマホ用に適正化 */
+        line-height: 1.4;
+        margin-bottom: 8px;
+        word-wrap: break-word;             /* 万が一の折り返しを許可 */
+    }
+
+    /* 5. 日付や趣味のテキストの調整 */
+    .profile-info {
+        font-size: 0.85rem;
+        white-space: nowrap;               /* 「/」の前後で変に改行されるのを防ぐ */
+    }
+    .profile-hobby {
+        font-size: 0.9rem;
     }
 }
