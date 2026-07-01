@@ -484,11 +484,36 @@ footer {
 }
 
 @media (max-width: 768px) {
+    /* --- 全体の調整 --- */
     h1 { font-size: 2.2rem; }
     .hero-content.fade-in .engNames { font-size: 2.8rem; }
     #timer { font-size: 2.5rem; gap: 20px; }
     section { padding: 70px 15px; }
-    .profile-card { padding: 30px; }
     .rsvp { padding: 50px 20px; margin: 70px 15px; }
     .info-details { max-width: 90%; }
+
+    /* --- 新郎新婦プロフィールのスマホ対応 --- */
+    .profile-card { 
+        padding: 40px 20px; 
+    }
+
+    /* 1. 横並びから縦並びに変更 */
+    .profile-twins {
+        flex-direction: column; 
+        align-items: center;    
+        gap: 50px; /* 新郎と新婦の間の上下の余白 */
+    }
+
+    /* 2. 個々のプロフィールが横幅いっぱいに広がらないよう調整 */
+    .profile-person {
+        width: 100%;
+        max-width: 320px; 
+    }
+
+    /* 3. 画像サイズがスマホ画面に対して大きすぎないように制限 */
+    .profile-img {
+        width: 150px;
+        height: 150px;
+        margin-bottom: 15px;
+    }
 }
